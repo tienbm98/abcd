@@ -43,4 +43,14 @@ class User extends Authenticatable
     ];
 
     protected $guard = 'admin';
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'comment_id');
+    }
+
+    public function news()
+    {
+        return $this->hasMany(News::class, 'news_id');
+    }
 }

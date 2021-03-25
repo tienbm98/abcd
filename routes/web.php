@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\HomeController;
+use App\Http\Controllers\Backend\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,14 +20,20 @@ Route::get('/', function () {
     return view('alo');
 });
 
-Route::get('/login', [Auth\LoginController::class, 'showLoginForm'])->name('login');
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 
-Route::post('/login', [Auth\LoginController::class, 'login'])->name('admin.login');
+Route::post('/login', [LoginController::class, 'login'])->name('admin.login');
 
-Route::get('/logout', [Auth\LoginController::class, 'logout'])->name('logout');
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::prefix('admin')->group(function () {
+Route::group(['prefix' => 'admin'], function () {
+    //admin
     Route::group(['middleware' => ['auth', 'admin']], function () {
-        Route::get('/home', [Auth\HomeController::class, 'index'])->name('admin.home');
+        Route::get('/home', [HomeController::class, 'index'])->name('admin.home');
+    });
+
+    //category
+    Route::group(['prefix' => 'category'], function () {
+
     });
 });

@@ -21,9 +21,8 @@
 </head>
 
 <body>
-
     <!-- ########## START: MENU PANEL ########## -->
-    <div class="br-logo"><a href=""><span>[</span>thảo ngu ngốc<span>]</span></a></div>
+    <div class="br-logo"><a href=""><span>[</span>chi ăn cức<span>]</span></a></div>
 
     @extends('backend.layout.menu')
 
@@ -33,22 +32,20 @@
 
     @extends('backend.layout.header')
 
-    
-
-    
     <div class="br-mainpanel">
         <div class="pd-30">
-            <h4 class="tx-gray-800 mg-b-5">
-            Thảo "ngốk ngếk" xinh gái đanh đá yoang hồ các thứ các kiểu
-            <br>Chỉ bắt nạt với hay dỗi mình là nhanh thôi <br>
-            Chả nhẽ lại túm lại đấm cho trận <br>
-            Đấm cho lại bảo ác =)))))
+            <h4 class="tx-gray-800 mg-b-30">
+                DM Chi luôn đấy đừng có mà dầu nhờn
+                <br>Để t đấm cho thì đừng có trách <br>
+                Đừng có mà đi mách ô bô =))))))) <br>
             </h4>
-            <p class="mg-b-0"></p>
+            @yield('header')
         </div>
 
-        <div class="br-pagebody mg-t-5 pd-x-30">
-            @yield('content')
+        <div class="br-pagebody mg-t-0 pd-x-30">
+            <div class="br-section-wrapper">
+                @yield('content')
+            </div>
         </div><!-- br-pagebody -->
 
         <footer class="br-footer">
@@ -76,7 +73,6 @@
     <script src="{{ asset('js/jquery.sparkline.min.js') }}"></script>
     <script src="{{ asset('js/d3.js') }}"></script>
     <script src="{{ asset('js/rickshaw.min.js') }}"></script>
-
 
     <script src="{{ asset('js/bracket.js') }}"></script>
     <script src="{{ asset('js/ResizeSensor.js') }}"></script>

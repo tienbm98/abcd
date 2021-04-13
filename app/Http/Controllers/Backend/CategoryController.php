@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CategoryRequest;
 use Illuminate\Http\Request;
+use App\Models\Category;
 
 class CategoryController extends Controller
 {
@@ -14,7 +16,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::getAllCategories();
+
+        return view('backend.categories.index', ['categories' => $categories]);
     }
 
     /**
@@ -24,7 +28,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.categories.create');
     }
 
     /**
@@ -33,9 +37,17 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
-        //
+        $input = $request->all();
+        
+        $category = Category::addNewCategory($input);
+
+        if ($category) {
+            return redirect()->route('category.index')->with(SUCCESS, 'Create success !');
+        }
+
+        return redirect()->route('category.index')->with(ERROR, 'Create failed !');
     }
 
     /**
@@ -57,7 +69,9 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = Category::getCategoryById($id);
+
+        return view('backend.categories.edit', ['category' => $category]);
     }
 
     /**
@@ -67,9 +81,17 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CategoryRequest $request)
     {
-        //
+        $input = $request->all();
+        // dd($input);
+        $categoryUpdate = Category::updateCategoryById($input);
+
+        if ($categoryUpdate) {
+            return redirect()->route('category.index')->with(SUCCESS, 'Update success !');
+        }
+
+        return redirect()->route('category.index')->with(ERROR, 'Update failed !');
     }
 
     /**
@@ -80,6 +102,21 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $categoryDelete = Category::deleteCategoryById($id);
+        $categoryDelete->delete();
+
+        if ($categoryDelete) {
+            return redirect()->back()->with(SUCCESS, 'Delete category successfully');
+        }
+
+        return redirect()->back()->with(ERROR, 'Delete category false');
+
     }
+
+    // public function searchCategory(Request $request)
+    // {
+    //     $input = $request->all();
+
+    //     return Category::searchCategory($input);
+    // }
 }

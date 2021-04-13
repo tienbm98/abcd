@@ -2,9 +2,8 @@
 
 @section('content')
 <h1 style="color: red">
-    thảo xí gái đánh đá thấy mẹ<br>
+    mầy cứ liệu hồn<br>
     đừng có mà dầu nhờn<br>
-    có ngày trượt chân ngã thì đừng trách<br>
-    đừng hỏi vì sao nước biển mặn
+    có ngày ăn dã thì đừng có mà chạy đi mách ô bà bô<br>
 </h1>
 @endsection
